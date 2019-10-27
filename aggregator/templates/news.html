@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block content%}
+    <!-- Body -->
+    <div class='cool-body'>
+        <div class='row'>
+            <div class='col-6'>
+                <h1 class="site-title"> > IMDB</h1>
+                <br>
+                {% if IMBDNews %}
+                <ul>
+                    {% for item in IMBDNews %}
+                        <li><a href="{{item.href}}">{{ item.title }}</a></li>
+                    {% endfor%}
+                </ul>
+                {% else %}
+                    <h1>Sorry no news</h1>
+                {% endif%}
+            </div>
+            <div class="col-6">
+                <h1 class="site-title"> > Hacker News</h1>
+                <br>
+                {% if HackerNews %}
+                <ul>
+                    {% for item in HackerNews %}
+                        <li><a href="{{item.link}}">{{ item.title }}</a>, {{item.votes}} votes</li>
+                    {% endfor%}
+                </ul>
+                {% else %}
+                    <h1>Sorry no news</h1>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+{% endblock %}
