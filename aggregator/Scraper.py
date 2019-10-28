@@ -7,7 +7,6 @@ class TerminalScraper(object):
         self.webpage = web_link    
         self.links, self.subtext = self.__scrape_webpage(self.webpage)
     
-    @classmethod
     def __scrape_webpage(self,default_link):
         exists_next_page = True
         counter = 1
@@ -58,11 +57,13 @@ class IMDBScraper(object):
 
     def __scrape_news(self):
         articles = []
-        news = self.__soup.select('.news-article__title>a')
-        for article in news:
+        news = self.__soup.select('.news-article__title > a')
+        date = self.__soup.select('.news-article__date')
+        for idx, article in enumerate(news):
             articles.append({
                 'title': article.getText(),
-                'href': self.__imdb+article.get('href',None)
+                'href': self.__imdb+article.get('href',None),
+                'date': date[idx].getText()
             })
         return articles
 

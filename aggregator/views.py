@@ -6,12 +6,22 @@ from aggregator.Scraper import TerminalScraper, IMDBScraper
 
 
 hnScraper = TerminalScraper('https://news.ycombinator.com/news?p=')
-imbdScraper = IMDBScraper()
+imdbScraper = IMDBScraper()
 
 # Create your views here.
-def meister_home(request):
+def terminal_home(request):
+    context={
+        'Movies': imdbScraper.articles[0],
+        'HotNews': hnScraper.filter_webpage()[0]
+    }
+    return render(request, 'home.html', context=context)
+
+def terminal_news(request):
     context = {
-        'IMBDNews': imbdScraper.articles[:5],
+        'IMDBNews': imdbScraper.articles[:5],
         'HackerNews': hnScraper.filter_webpage()[:5]
     }
-    return render(request, 'news.html',context=context)
+    return render(request,'news.html',context=context)
+
+def sign_in(request):
+    return render(request,'sign-in.html')

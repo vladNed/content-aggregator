@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html> 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Der Meister - News</title>
+        <title>Terminal News</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -11,8 +12,9 @@
         <!-- CSS files -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'aggregator/style.css'%}" type="text/css">
+        
+        <link rel="stylesheet" href="{% static 'aggregator/css/style.css'%}" type="text/css">
+        <link rel="stylesheet" href="{% static 'aggregator/css/home.css'%}" type="text/css">
 
     </head>
     <body>
@@ -27,9 +29,9 @@
     
             <nav class="header-nav-wrap">
                 <ul class="header-nav">
-                    <li class="current"><a class="smoothscroll"  href="#home" title="home">| 0: Home</a></li>
-                    <li><a class="smoothscroll"  href="#about" title="about">| 1: News</a></li>
-                    <li><a class="smoothscroll"  href="#contact" title="contact">| 3: Sign In</a></li>
+                    <li class="current"><a class="smoothscroll"  href="{% url 'index' %}" title="home">| 0: Home</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'terminal_news'%}" title="news">| 1: News</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'sign-in'%}" title="contact">| 3: Sign In</a></li>
                 </ul>
             </nav>
     
@@ -43,32 +45,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function() {
-                var f = document.getElementById('terminal-logo');
-                var text = 'Terminal'
-                var i = 0
-                
-                function TypeWriter(){
-                    if(f.innerHTML == 'Terminal'|| f.innerHTML=='Terminal|' && i == 0){
-                        f.innerHTML=''
-                        console.log('just started')
-                    }
-                    if(i < text.length){
-                        f.innerHTML = f.innerHTML.slice(0,-1)
-                        f.innerHTML += text.charAt(i)+'|'
-                        i++
-                        setTimeout(TypeWriter,70);
-                    } else {
-                        i = 0
-                        f.innerHTML = f.innerHTML.slice(0,-1)
-                    }
-                }
-                setInterval(TypeWriter,10000)
-
-                
-                
-            });
-        </script>
+        <script src="{% static 'aggregator/js/type-writer.js'%}"></script>
     </body>
 </html>

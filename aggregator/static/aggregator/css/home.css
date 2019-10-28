@@ -1,0 +1,16 @@
+.home-class{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+}
+
+.continue-reading{
+    color: rgb(211, 6, 84);
+    transition: 0.2s ease-in-out;
+
+}
+.continue-reading:hover{
+    color: green;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+}

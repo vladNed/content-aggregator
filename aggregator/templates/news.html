@@ -7,9 +7,9 @@
             <div class='col-6'>
                 <h1 class="site-title"> > IMDB</h1>
                 <br>
-                {% if IMBDNews %}
+                {% if IMDBNews %}
                 <ul>
-                    {% for item in IMBDNews %}
+                    {% for item in IMDBNews %}
                         <li><a href="{{item.href}}">{{ item.title }}</a></li>
                     {% endfor%}
                 </ul>

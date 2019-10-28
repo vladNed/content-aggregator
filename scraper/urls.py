@@ -19,5 +19,5 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('news/',include('aggregator.urls'))
+    path('terminal/',include('aggregator.urls'))
 ]
