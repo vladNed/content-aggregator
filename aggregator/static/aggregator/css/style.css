@@ -47,7 +47,7 @@ a{
     display: inline-block;
     position: absolute;
     margin:0px 0px 0px 1rem;
-    top: 30%;
+    top: 35%;
 }
 .header-logo>a{
     font-size: 30px;
@@ -59,7 +59,7 @@ a{
 .header-nav-wrap{
     position: relative;
     float: right;
-    top: 30%;
+    top: 35%;
 }
 .header-nav-wrap li{
     display: inline-block;
@@ -70,11 +70,28 @@ a{
 .header-nav-wrap li a{
     font-size: 25px;
     color: black;
+    transition: 0.2s ease-out;
+}
+.header-nav-wrap li a:before{
+    content:'';
+    border: 1px black solid;
+    position: relative;
+    left: -1rem;
+    transition: 0.2s ease-in;
 }
 
 .header-nav-wrap li a:hover{
     color: rgb(211, 6, 84);
     text-decoration: none;
+    transition: 0.2s ease-in;
+}
+.header-nav-wrap li a:hover:before{
+    content:'';
+    border: 2px rgb(211, 6, 84) solid;
+    position: relative;
+    left: -1rem;
+    transition: 0.2s ease-in;
+    padding-top: -1rem;
 }
 
 
