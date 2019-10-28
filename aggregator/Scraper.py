@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 class TerminalScraper(object):
 
@@ -69,3 +70,28 @@ class IMDBScraper(object):
 
     def refresh(self):
         self.articles = self.__scrape_news()
+
+    def sort_stories_by_date(self,m_list):
+        return sorted(m_list, key=lambda k: datetime.datetime.strptime(k['date'],'%d %B %Y'), reverse=True)
+
+class DevScraper(object):
+
+    def __init__(self):
+        self.website = 'https://dev.to/'
+        self.webpage = requests.get(self.website)
+        self.soup = BeautifulSoup(self.webpage.text, 'html.parser')
+
+    def scrape_news(self):
+        articles = []
+        links = self.soup.select('.index-article-link')
+        news = self.soup.select('.index-article-link > div.content > h3')
+        date = self.soup.select('.single-article > h4 > a > time')
+        for idx,article in enumerate(news):
+            articles.append({
+                'title': article.getText(),
+                'href': links[idx].get('href'),
+                'date': date[idx].getText()
+
+            })
+        return articles
+        

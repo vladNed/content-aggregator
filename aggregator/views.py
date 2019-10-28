@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup
-from aggregator.Scraper import TerminalScraper, IMDBScraper
+from aggregator.Scraper import TerminalScraper, IMDBScraper, DevScraper
 
 
 hnScraper = TerminalScraper('https://news.ycombinator.com/news?p=')
 imdbScraper = IMDBScraper()
+devScraper = DevScraper()
 
 # Create your views here.
 def terminal_home(request):
@@ -19,7 +20,8 @@ def terminal_home(request):
 def terminal_news(request):
     context = {
         'IMDBNews': imdbScraper.articles[:5],
-        'HackerNews': hnScraper.filter_webpage()[:5]
+        'HackerNews': hnScraper.filter_webpage()[:5],
+        'DevNews': devScraper.scrape_news()[:5]
     }
     return render(request,'news.html',context=context)
 
