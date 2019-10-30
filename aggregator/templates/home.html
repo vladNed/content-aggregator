@@ -1,0 +1,49 @@
+{% extends "index.html"%}
+
+{% block content %}
+{% load static%}
+    <div class="home-class">
+        <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic">Your fast news terminal is here.</h1>
+                <p class="lead my-3">Minimalist design, latest news in one place for perfectionists and hipsters.</p>
+                <p class="lead mb-0"><a href="{% url 'terminal_news' %}" class="text-white font-weight-bold">Start reading...</a></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong class="d-inline-block mb-2 text-primary">Movies</strong>
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="#">IMDB News</a>
+                    </h3>
+                    <br>
+
+                    <div class="mb-1 text-muted">{{ Movies.date }}</div>
+                    <p class="card-text mb-auto">{{ Movies.title }}</p>
+                    <a href="{{Movies.href}}" class="continue-reading" target="__blank">Continue reading</a>
+                </div>
+                <img class="card-img-right flex-auto d-none d-md-block" style="width: 200px; height: 250px;" src="{% static 'aggregator/images/hot-news.jpg' alt='Hot News'%}" data-holder-rendered="true">
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                <strong class="d-inline-block mb-2 text-success">Hot Topic</strong>
+                <h3 class="mb-0">
+                    <a class="text-dark" href="#">Hot News</a>
+                </h3>
+                <br>
+                <div class="mb-1 text-muted">{{Movies.date}}</div>
+                <p class="card-text mb-auto">{{HotNews.title}}</p>
+                <a href="{{HotNews.link}}" class="continue-reading" target="__blank">Continue reading</a>
+                </div>
+                <img class="card-img-right flex-auto d-none d-md-block" src="{% static 'aggregator/images/typewriter.jpg'%}" data-holder-rendered="true" style="width: 250px; height: 250px;">
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

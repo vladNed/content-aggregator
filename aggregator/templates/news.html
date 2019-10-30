@@ -5,12 +5,16 @@
     <div class='cool-body'>
         <div class='row'>
             <div class='col-6'>
-                <h1 class="site-title"> > IMDB</h1>
+                <h1 class="site-title">  _IMDB</h1>
                 <br>
-                {% if IMBDNews %}
+                {% if IMDBNews %}
                 <ul>
-                    {% for item in IMBDNews %}
-                        <li><a href="{{item.href}}">{{ item.title }}</a></li>
+                    {% for item in IMDBNews %}
+                        <li>
+                            <a href="{{item.href}}">{{ item.title }}
+                                <div class="mb-1 text-muted">{{item.date}}</div>
+                            </a>
+                        </li>
                     {% endfor%}
                 </ul>
                 {% else %}
@@ -18,12 +22,35 @@
                 {% endif%}
             </div>
             <div class="col-6">
-                <h1 class="site-title"> > Hacker News</h1>
+                <h1 class="site-title"> _Hacker News</h1>
                 <br>
                 {% if HackerNews %}
                 <ul>
                     {% for item in HackerNews %}
-                        <li><a href="{{item.link}}">{{ item.title }}</a>, {{item.votes}} votes</li>
+                        <li>
+                            <a href="{{item.href}}">{{ item.title }}
+                                <div class="mb-1 text-muted">{{item.votes}} votes</div>
+                            </a>
+                        </li>
+                    {% endfor%}
+                </ul>
+                {% else %}
+                    <h1>Sorry no news</h1>
+                {% endif%}
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-6'>
+                <h1 class="site-title">  _Dev.to</h1>
+                <br>
+                {% if DevNews %}
+                <ul>
+                    {% for item in DevNews %}
+                        <li>
+                            <a href="{{item.href}}">{{ item.title }}
+                                <div class="mb-1 text-muted">{{ item.date }}</div>
+                            </a>
+                        </li>
                     {% endfor%}
                 </ul>
                 {% else %}

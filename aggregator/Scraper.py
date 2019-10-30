@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 class TerminalScraper(object):
 
@@ -7,7 +8,6 @@ class TerminalScraper(object):
         self.webpage = web_link    
         self.links, self.subtext = self.__scrape_webpage(self.webpage)
     
-    @classmethod
     def __scrape_webpage(self,default_link):
         exists_next_page = True
         counter = 1
@@ -58,13 +58,40 @@ class IMDBScraper(object):
 
     def __scrape_news(self):
         articles = []
-        news = self.__soup.select('.news-article__title>a')
-        for article in news:
+        news = self.__soup.select('.news-article__title > a')
+        date = self.__soup.select('.news-article__date')
+        for idx, article in enumerate(news):
             articles.append({
                 'title': article.getText(),
-                'href': self.__imdb+article.get('href',None)
+                'href': self.__imdb+article.get('href',None),
+                'date': date[idx].getText()
             })
         return articles
 
     def refresh(self):
         self.articles = self.__scrape_news()
+
+    def sort_stories_by_date(self,m_list):
+        return sorted(m_list, key=lambda k: datetime.datetime.strptime(k['date'],'%d %B %Y'), reverse=True)
+
+class DevScraper(object):
+
+    def __init__(self):
+        self.website = 'https://dev.to/'
+        self.webpage = requests.get(self.website)
+        self.soup = BeautifulSoup(self.webpage.text, 'html.parser')
+
+    def scrape_news(self):
+        articles = []
+        links = self.soup.select('.index-article-link')
+        news = self.soup.select('.index-article-link > div.content > h3')
+        date = self.soup.select('.single-article > h4 > a > time')
+        for idx,article in enumerate(news):
+            articles.append({
+                'title': article.getText(),
+                'href': links[idx].get('href'),
+                'date': date[idx].getText()
+
+            })
+        return articles
+        
